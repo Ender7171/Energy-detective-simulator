@@ -145,17 +145,17 @@ function renderRoom() {
     div.appendChild(img);
 
     div.style.position = "absolute";
-    if (mobile) {
-      div.style.top = `calc(${app.top} - 12%)`;
-      div.style.left = app.left;
-      div.style.width = app.width;
-      div.style.height = app.height;
-    } else {
-      div.style.top = (app.topPx - 80) + "px";
-      div.style.left = app.leftPx + "px";
-      div.style.width = app.widthPx + "px";
-      div.style.height = app.heightPx + "px";
-    }
+   if (mobile) {
+  div.style.top = app.top;
+  div.style.left = app.left;
+  div.style.width = app.width;
+  div.style.height = app.height;
+} else {
+  div.style.top = app.topPx + "px";
+  div.style.left = app.leftPx + "px";
+  div.style.width = app.widthPx + "px";
+  div.style.height = app.heightPx + "px";
+}
 
     div.addEventListener("click", () => {
       if (gameOver) return;
@@ -236,3 +236,4 @@ resetBtn.addEventListener("click", () => {
 
 // --- Re-render on window resize ---
 window.addEventListener("resize", () => renderRoom());
+
