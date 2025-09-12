@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Energy Saving Game</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Start Page -->
+  <div id="startPage">
+    <h1>🔎 Energy Saving Detective</h1>
+    <div id="rules">
+      <h2>Rules</h2>
+      <ul>
+        <li>Click on appliances that are <strong>ON</strong> to switch them off.</li>
+        <li>Some appliances may be <strong>In Use</strong> and cannot be switched off.</li>
+        <li>Keep an eye on the <strong>energy bar</strong> — it decreases over time!</li>
+        <li>Finish all rooms to win the game.</li>
+      </ul>
+    </div>
+    <button id="startBtn">Start Game</button>
+  </div>
+
+  <!-- Main Game -->
+  <div id="game">
+    <div id="energy-container">
+      <div id="energy-bar"></div>
+    </div>
+    <h2 id="room-title">Room</h2>
+    <div id="appliances"></div>
+    <button id="switch-off-btn" disabled>Switch Off</button>
+    <div id="message"></div>
+    <button id="resetProgressBtn" class="reset-btn">🔄 Reset Progress</button>
+  </div>
+
+  <!-- Popup message -->
+  <div id="popup-message"></div>
+
+  <!-- Overlay -->
+  <div id="overlay"></div>
+
+  <script src="script.js"></script>
+</body>
+</html>
