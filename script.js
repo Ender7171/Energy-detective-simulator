@@ -64,7 +64,9 @@ const resetBtn = document.getElementById("resetProgressBtn");
 gameDiv.style.display = "none";
 
 // --- Detect mobile ---
-function isMobile() { return window.innerWidth <= 600; }
+function isMobile() {
+  return window.innerWidth <= 600;
+}
 
 // --- Assign random in-use appliances ---
 function assignRandomInUse(room) {
@@ -144,17 +146,20 @@ function renderRoom() {
     img.style.objectFit = "contain";
     div.appendChild(img);
 
-   if (mobile) {
-  div.style.top = app.top;
-  div.style.left = app.left;
-  div.style.width = app.width;
-  div.style.height = app.height;
-} else {
-  div.style.top = app.topPx + "px";
-  div.style.left = app.leftPx + "px";
-  div.style.width = app.widthPx + "px";
-  div.style.height = app.heightPx + "px";
-}
+    div.style.position = "absolute";
+
+    if (mobile) {
+      // Use given percentages directly (no extra upward offset)
+      div.style.top = app.top;
+      div.style.left = app.left;
+      div.style.width = app.width;
+      div.style.height = app.height;
+    } else {
+      div.style.top = app.topPx + "px";
+      div.style.left = app.leftPx + "px";
+      div.style.width = app.widthPx + "px";
+      div.style.height = app.heightPx + "px";
+    }
 
     div.addEventListener("click", () => {
       if (gameOver) return;
@@ -235,6 +240,3 @@ resetBtn.addEventListener("click", () => {
 
 // --- Re-render on window resize ---
 window.addEventListener("resize", () => renderRoom());
-
-
-
