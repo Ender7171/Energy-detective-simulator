@@ -148,18 +148,19 @@ function renderRoom() {
 
     div.style.position = "absolute";
 
-    if (mobile) {
-      // Use given percentages directly (no extra upward offset)
-      div.style.top = app.top;
-      div.style.left = app.left;
-      div.style.width = app.width;
-      div.style.height = app.height;
-    } else {
-      div.style.top = app.topPx + "px";
-      div.style.left = app.leftPx + "px";
-      div.style.width = app.widthPx + "px";
-      div.style.height = app.heightPx + "px";
-    }
+   if (mobile) {
+  // Mobile: use given percentages directly
+  div.style.top = app.top;
+  div.style.left = app.left;
+  div.style.width = app.width;
+  div.style.height = app.height;
+} else {
+  // Desktop: keep the upward adjustment
+  div.style.top = (app.topPx - 80) + "px";
+  div.style.left = app.leftPx + "px";
+  div.style.width = app.widthPx + "px";
+  div.style.height = app.heightPx + "px";
+}
 
     div.addEventListener("click", () => {
       if (gameOver) return;
@@ -240,3 +241,4 @@ resetBtn.addEventListener("click", () => {
 
 // --- Re-render on window resize ---
 window.addEventListener("resize", () => renderRoom());
+
