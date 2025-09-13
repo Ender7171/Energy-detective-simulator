@@ -144,14 +144,12 @@ function renderRoom() {
     img.style.objectFit = "contain";
     div.appendChild(img);
 
-    div.style.position = "absolute";
    if (mobile) {
   div.style.top = app.top;
   div.style.left = app.left;
   div.style.width = app.width;
   div.style.height = app.height;
 } else {
-  const desktopOffset = 80;
   div.style.top = app.topPx + "px";
   div.style.left = app.leftPx + "px";
   div.style.width = app.widthPx + "px";
@@ -237,5 +235,6 @@ resetBtn.addEventListener("click", () => {
 
 // --- Re-render on window resize ---
 window.addEventListener("resize", () => renderRoom());
+
 
 
