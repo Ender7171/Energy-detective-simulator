@@ -16,9 +16,9 @@ const rooms = [
     background: "bedroom.png",
     inUseAssigned: false,
     appliances: [
-      { name: "Fan", state: "on", top: "31%", left: "19%", width: "12%", height: "15%", topPx: 200, leftPx: 160, widthPx: 100, heightPx: 100 },
-      { name: "Lamp", state: "on", top: "40%", left: "86%", width: "12%", height: "15%", topPx: 260, leftPx: 730, widthPx: 100, heightPx: 100 },
-      { name: "Heater", state: "on", top: "68%", left: "76%", width: "14%", height: "18%", topPx: 400, leftPx: 650, widthPx: 120, heightPx: 120 }
+      { name: "Fan", state: "on", topPx: 195, leftPx: 160, widthPx: 100, heightPx: 100, topPxMobile: 200, leftPxMobile: 160 },
+      { name: "Lamp", state: "on", topPx: 255, leftPx: 730, widthPx: 100, heightPx: 100, topPxMobile: 260, leftPxMobile: 730 },
+      { name: "Heater", state: "on", topPx: 390, leftPx: 650, widthPx: 120, heightPx: 120, topPxMobile: 400, leftPxMobile: 650 }
     ]
   },
   {
@@ -26,9 +26,9 @@ const rooms = [
     background: "livingroom.png",
     inUseAssigned: false,
     appliances: [
-      { name: "Charger", state: "on", top: "38%", left: "92%", width: "14%", height: "18%", topPx: 250, leftPx: 780, widthPx: 120, heightPx: 120 },
-      { name: "Computer", state: "on", top: "55%", left: "46%", width: "12%", height: "14%", topPx: 360, leftPx: 390, widthPx: 100, heightPx: 90 },
-      { name: "AC", state: "on", top: "6%", left: "47%", width: "67%", height: "31%", topPx: 40, leftPx: 600, widthPx: 170, heightPx: 180 }
+      { name: "Charger", state: "on", topPx: 240, leftPx: 780, widthPx: 120, heightPx: 120, topPxMobile: 250, leftPxMobile: 780 },
+      { name: "Computer", state: "on", topPx: 350, leftPx: 390, widthPx: 100, heightPx: 90, topPxMobile: 360, leftPxMobile: 390 },
+      { name: "AC", state: "on", topPx: 30, leftPx: 600, widthPx: 170, heightPx: 180, topPxMobile: 40, leftPxMobile: 600 }
     ]
   },
   {
@@ -36,8 +36,8 @@ const rooms = [
     background: "office.png",
     inUseAssigned: false,
     appliances: [
-      { name: "AC", state: "on", top: "6%", left: "26%", width: "60%", height: "26%", topPx: 40, leftPx: 420, widthPx: 170, heightPx: 170 },
-      { name: "TV", state: "on", top: "20%", left: "32%", width: "38%", height: "35%", topPx: 150, leftPx: 270, widthPx: 280, heightPx: 200 }
+      { name: "AC", state: "on", topPx: 30, leftPx: 420, widthPx: 170, heightPx: 170, topPxMobile: 40, leftPxMobile: 420 },
+      { name: "TV", state: "on", topPx: 140, leftPx: 270, widthPx: 280, heightPx: 200, topPxMobile: 150, leftPxMobile: 270 }
     ]
   }
 ];
@@ -87,7 +87,7 @@ function showPopupMessage(text) {
   setTimeout(() => popupDiv.style.opacity = 0, 1500);
 }
 
-// --- Start game button ---
+// --- Start game ---
 startBtn.addEventListener("click", () => {
   startPage.style.display = "none";
   gameDiv.style.display = "flex";
@@ -126,6 +126,7 @@ function renderRoom() {
     assignRandomInUse(room);
     room.inUseAssigned = true;
   }
+
   const mobile = isMobile();
   roomTitle.textContent = room.title;
   appliancesDiv.style.backgroundImage = room.background ? `url(${room.background})` : "none";
@@ -148,19 +149,18 @@ function renderRoom() {
 
     div.style.position = "absolute";
 
-   if (mobile) {
-  // Mobile: use given percentages directly
-  div.style.top = app.top;
-  div.style.left = app.left;
-  div.style.width = app.width;
-  div.style.height = app.height;
-} else {
-  // Desktop: keep the upward adjustment
-  div.style.top = (app.topPx - 90) + "px";
-  div.style.left = app.leftPx + "px";
-  div.style.width = app.widthPx + "px";
-  div.style.height = app.heightPx + "px";
-}
+    // Use separate offsets for desktop and mobile
+    if (mobile) {
+      div.style.top = app.topPxMobile + "px";
+      div.style.left = app.leftPxMobile + "px";
+      div.style.width = app.widthPx + "px";
+      div.style.height = app.heightPx + "px";
+    } else {
+      div.style.top = (app.topPx - "80") + "px";
+      div.style.left = app.leftPx + "px";
+      div.style.width = app.widthPx + "px";
+      div.style.height = app.heightPx + "px";
+    }
 
     div.addEventListener("click", () => {
       if (gameOver) return;
@@ -230,7 +230,7 @@ resetBtn.addEventListener("click", () => {
   gameOver = false;
   rooms.forEach(room => {
     room.inUseAssigned = false;
-    room.appliances.forEach(app => { if(app.state!=="off") app.state="on"; });
+    room.appliances.forEach(app => { if(app.state !== "off") app.state = "on"; });
   });
   updateEnergyBar();
   messageDiv.textContent = "";
@@ -241,7 +241,3 @@ resetBtn.addEventListener("click", () => {
 
 // --- Re-render on window resize ---
 window.addEventListener("resize", () => renderRoom());
-
-
-
-
