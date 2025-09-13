@@ -107,7 +107,7 @@ function startGame() {
       return;
     }
     updateEnergyBar();
-  }, 1000);
+  }, 600);
 }
 
 // --- Update energy bar ---
@@ -241,3 +241,4 @@ resetBtn.addEventListener("click", () => {
 
 // --- Re-render on window resize ---
 window.addEventListener("resize", () => renderRoom());
+
