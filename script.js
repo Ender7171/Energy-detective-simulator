@@ -151,6 +151,7 @@ function renderRoom() {
   div.style.width = app.width;
   div.style.height = app.height;
 } else {
+  const desktopOffset = 80;
   div.style.top = app.topPx + "px";
   div.style.left = app.leftPx + "px";
   div.style.width = app.widthPx + "px";
@@ -236,4 +237,5 @@ resetBtn.addEventListener("click", () => {
 
 // --- Re-render on window resize ---
 window.addEventListener("resize", () => renderRoom());
+
 
