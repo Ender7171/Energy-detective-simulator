@@ -156,7 +156,7 @@ function renderRoom() {
   div.style.height = app.height;
 } else {
   // Desktop: keep the upward adjustment
-  div.style.top = (app.topPx - 80) + "px";
+  div.style.top = (app.topPx - 120) + "px";
   div.style.left = app.leftPx + "px";
   div.style.width = app.widthPx + "px";
   div.style.height = app.heightPx + "px";
@@ -241,4 +241,5 @@ resetBtn.addEventListener("click", () => {
 
 // --- Re-render on window resize ---
 window.addEventListener("resize", () => renderRoom());
+
 
