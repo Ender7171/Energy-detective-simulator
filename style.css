@@ -244,4 +244,9 @@ body {
   #message {
     font-size: 16px;
   }
+}@media (max-width: 600px) {
+  #appliances {
+    height: 60vh;  /* ensures mobile container has enough height */
+    max-height: none; /* remove max-height restriction */
+  }
 }
